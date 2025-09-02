@@ -24,13 +24,6 @@ export default function HomeScreen() {
     setData(newData);
   };
 
-  const setPausedAll = (paused) => {
-    const newData = data.map(it => {
-      return { ...it, isPaused: paused };
-    });
-    setData(newData);
-  };
-
   const renderVideos = ({ item }) => {
     return (
       <OneVideo
@@ -42,7 +35,6 @@ export default function HomeScreen() {
   };
 
   const onGo = () => {
-    //setPausedAll(true);
     navigation.navigate('Page2');
   };
 
@@ -55,6 +47,11 @@ export default function HomeScreen() {
         data={data}
         keyExtractor={item => item.id}
         renderItem={renderVideos}
+        viewabilityConfig={{
+          waitForInteraction: true,
+          itemVisiblePercentThreshold: 30,
+          minimumViewTime: 100,
+        }}
       />
     </View>
   );

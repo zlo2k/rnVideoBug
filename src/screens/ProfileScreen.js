@@ -24,15 +24,7 @@ export default function ProfileScreen() {
     setData(newData);
   };
 
-  const setPausedAll = paused => {
-    const newData = data.map(it => {
-      return { ...it, isPaused: paused };
-    });
-    setData(newData);
-  };
-
   const onGo = () => {
-    //setPausedAll(true);
     navigation.goBack();
   };
 
@@ -54,6 +46,11 @@ export default function ProfileScreen() {
         data={data}
         keyExtractor={item => item.id}
         renderItem={renderVideos}
+        viewabilityConfig={{
+          waitForInteraction: true,
+          itemVisiblePercentThreshold: 30,
+          minimumViewTime: 100,
+        }}
       />
     </View>
   );
